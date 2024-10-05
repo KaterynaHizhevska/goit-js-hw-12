@@ -53,12 +53,12 @@ loadMoreBtn.addEventListener('click', async () => {
   page += 1;
   showLoader();
 
-  try {
+   try {
     const data = await fetchImages(query, page);
     hideLoader();
     renderGallery(data.hits);
 
-    if (page * 15 >= data.totalHits) {
+    if (data.hits.length < 15 || page * 15 >= data.totalHits) {
       loadMoreBtn.style.display = 'none';
       showError("We're sorry, but you've reached the end of search results.");
     }
